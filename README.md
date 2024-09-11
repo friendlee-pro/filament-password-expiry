@@ -1,5 +1,4 @@
-![image](https://github.com/user-attachments/assets/7551fcde-bc18-42f2-bc5f-9f803e307c1a)# Filament Password Expiry
-
+# Filament Password Expiry
 
 ## 🛠️ Be Part of the Journey
 
