@@ -1,4 +1,4 @@
-# Filament Password Expiry
+![image](https://github.com/user-attachments/assets/7551fcde-bc18-42f2-bc5f-9f803e307c1a)# Filament Password Expiry
 
 
 ## 🛠️ Be Part of the Journey
@@ -48,6 +48,25 @@ class User extends Authenticatable
     use HasPasswordExpiry;
     ...
 }
+```
+
+4. This plugin does not hash passwods when creating a new password. Instead, make sure your password is cast as 'hashed' in your User model
+```php
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+
 ```
 
 You are all good to go! Now when a user is created, the password_expires_at column will be updated with the current date and time plus the expires_in config value. When the user tries to login, the middleware will check if the password_expires_at column is less than the current date and time. If it is, the user will be redirected to the password expiry page.
