@@ -38,6 +38,11 @@ php artisan vendor:publish --tag="password-expiry-migrations"
 php artisan vendor:publish --tag="password-expiry-config"
 php artisan migrate
 ```
+If you need to, you can publish the translation file using the command:
+```bash
+php artisan vendor:publish --tag="password-expiry-translations"
+```
+
 3. In your authentication class, example `app/Models/User.php`, add the has password expiry trait to the model, the trait checks if all is setup correctly and will throw an exception if not. The trait will update the password_expires_at column when the user is created.
 ```php
 use EightyNine\FilamentPasswordExpiry\Concerns\HasPasswordExpiry;
