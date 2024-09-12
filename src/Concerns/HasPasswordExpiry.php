@@ -26,5 +26,14 @@ trait HasPasswordExpiry
                 $model->save();
             }
         });
+
+        static::updating(function ($model) {
+            if (
+                $model->isDirty(config('password-expiry.password_column_name')) &&
+                filled($model->{config('password-expiry.password_column_name')})
+            ) {
+                $model->{config('password-expiry.column_name')} = now()->addDays(config('password-expiry.expires_in'));
+            }
+        });
     }
 }
