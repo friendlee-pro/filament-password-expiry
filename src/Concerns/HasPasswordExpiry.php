@@ -17,13 +17,11 @@ trait HasPasswordExpiry
             ]));
         }
 
-        static::created(function ($model) {
-            if(
-                $model->wasChanged(config('password-expiry.password_column_name')) &&
+        static::creating(function ($model) {
+            if (
                 filled($model->{config('password-expiry.password_column_name')})
             ) {
                 $model->{config('password-expiry.column_name')} = now()->addDays(config('password-expiry.expires_in'));
-                $model->save();
             }
         });
 
