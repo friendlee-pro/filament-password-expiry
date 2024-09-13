@@ -133,6 +133,16 @@ class ResetPassword extends SimplePage
             return null;
         }
 
+        // check if new password is different from the current password
+        if (Hash::check($data['password'], $authObject->{config('password-expiry.password_column_name')})) {
+            Notification::make()
+                ->title(__('password-expiry::password-expiry.reset-password.notifications.same_password.title'))
+                ->body(__('password-expiry::password-expiry.reset-password.notifications.same_password.body'))
+                ->danger()
+                ->send();
+            return null;
+        }
+
         // check if both required columns exist in the database
         if (!Schema::hasColumn(config('password-expiry.table_name'), config('password-expiry.column_name'))) {
             Notification::make()
