@@ -18,12 +18,12 @@ class PasswordExpiryPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->middleware([
-            PasswordExpiryMiddleware::class
+            config('password-expiry.password_expiry_middleware', PasswordExpiryMiddleware::class),
         ]);
     }
 
     public function boot(Panel $panel): void
-    {        
+    {
         Route::redirect('/login', Filament::getLoginUrl())->name('login');
     }
 

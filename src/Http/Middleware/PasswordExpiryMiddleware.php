@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PasswordExpiryMiddleware
 {
@@ -23,7 +24,13 @@ class PasswordExpiryMiddleware
             return redirect(route(PasswordExpiry::getPasswordExpiryRoute()));
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        if ($response instanceof JsonResponse) {
+            return response($response->getContent(), $response->getStatusCode(), $response->headers->all());
+        }
+
+        return $response;
     }
 
     protected function passwordHasExpired(): bool
