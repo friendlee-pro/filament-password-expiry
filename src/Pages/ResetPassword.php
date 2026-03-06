@@ -6,16 +6,16 @@ use EightyNine\FilamentPasswordExpiry\Events\NewPasswordSet;
 use EightyNine\FilamentPasswordExpiry\Http\Response\PasswordResetResponse;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema as FSchema;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\SimplePage;
 use Filament\Forms\Components\Component;
-use Filament\Forms\Components\TextInput; 
-use Filament\Notifications\Notification; 
-use Illuminate\Contracts\Support\Htmlable; 
-use Illuminate\Support\Facades\Hash; 
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Validation\Rules\Password as PasswordRule; 
+use Illuminate\Validation\Rules\Password as PasswordRule;
 
 class ResetPassword extends SimplePage
 {
@@ -34,7 +34,7 @@ class ResetPassword extends SimplePage
     public ?string $passwordConfirmation = '';
 
 
-    public function form(Form $form): Form
+    public function form(FSchema $form): Form
     {
         return $form
             ->schema([
