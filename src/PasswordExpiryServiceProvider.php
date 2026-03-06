@@ -110,7 +110,6 @@ class PasswordExpiryServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-password-expiry', __DIR__ . '/../resources/dist/components/filament-password-expiry.js'),
-            Css::make('filament-password-expiry-styles', __DIR__ . '/../resources/dist/filament-password-expiry.css'),
             Js::make('filament-password-expiry-scripts', __DIR__ . '/../resources/dist/filament-password-expiry.js'),
         ];
     }

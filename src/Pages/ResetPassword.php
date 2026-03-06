@@ -5,11 +5,9 @@ namespace EightyNine\FilamentPasswordExpiry\Pages;
 use EightyNine\FilamentPasswordExpiry\Events\NewPasswordSet;
 use EightyNine\FilamentPasswordExpiry\Http\Response\PasswordResetResponse;
 use Filament\Actions\Action;
-use Filament\Facades\Filament;
-use Filament\Schemas\Schema as FSchema;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\SimplePage;
-use Filament\Forms\Components\Component;
+use Filament\Schemas\Schema as FSchema;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\Support\Htmlable;
@@ -25,7 +23,7 @@ class ResetPassword extends SimplePage
     /**
      * @var view-string
      */
-    protected static string $view = 'password-expiry::pages.reset-password';
+    protected string $view =   'password-expiry::pages.reset-password';
 
     public ?string $current_password = '';
 
@@ -34,17 +32,17 @@ class ResetPassword extends SimplePage
     public ?string $passwordConfirmation = '';
 
 
-    public function form(FSchema $form): Form
+    public function form(FSchema $form): FSchema
     {
         return $form
-            ->schema([
+            ->components([
                 $this->getCurrentPasswordFormComponent(),
                 $this->getPasswordFormComponent(),
                 $this->getPasswordConfirmationFormComponent(),
             ]);
     }
 
-    protected function getCurrentPasswordFormComponent(): Component
+    protected function getCurrentPasswordFormComponent(): TextInput
     {
         return TextInput::make('current_password')
             ->label(__('password-expiry::password-expiry.reset-password.form.current_password.label'))
@@ -55,7 +53,7 @@ class ResetPassword extends SimplePage
             ->validationAttribute(__('password-expiry::password-expiry.reset-password.form.current_password.validation_attribute'));
     }
 
-    protected function getPasswordFormComponent(): Component
+    protected function getPasswordFormComponent(): TextInput
     {
         return TextInput::make('password')
             ->label(__('password-expiry::password-expiry.reset-password.form.password.label'))
@@ -67,7 +65,7 @@ class ResetPassword extends SimplePage
             ->validationAttribute(__('password-expiry::password-expiry.reset-password.form.password.validation_attribute'));
     }
 
-    protected function getPasswordConfirmationFormComponent(): Component
+    protected function getPasswordConfirmationFormComponent(): TextInput
     {
         return TextInput::make('passwordConfirmation')
             ->label(__('password-expiry::password-expiry.reset-password.form.password_confirmation.label'))
